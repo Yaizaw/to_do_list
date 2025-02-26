@@ -14,7 +14,7 @@ struct ToDoListItem: Codable, Identifiable {
 	let createdDate: TimeInterval
 	var isDone: Bool
 
-	mutating func setDonde(_ state: Bool) {
+	mutating func setDone(_ state: Bool) {
 		isDone = state
 	}
 
