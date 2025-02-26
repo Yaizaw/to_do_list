@@ -10,39 +10,36 @@ import SwiftUI
 struct ToDoListItemsView: View {
 	@StateObject var viewModel = ToDoListItemViewViewModel()
 	let item: ToDoListItem
+	var onItemTap: (() -> Void)? = nil
 
 	var body: some View {
 		HStack {
-			VStack(alignment: .leading) {
-				Text(item.title)
-					.font(.body)
+			HStack{
+				VStack(alignment: .leading) {
+					Text(item.title)
+						.font(.body)
 
-				Text(
-					"\(Date(timeIntervalSince1970:item.dueDate).formatted(date: .abbreviated, time: .shortened))"
-
-				)
-				.font(.footnote)
-				.foregroundColor(Color(.secondaryLabel))
-
+					Text("\(Date(timeIntervalSince1970: item.dueDate).formatted(date: .abbreviated, time: .shortened))")
+						.font(.footnote)
+						.foregroundColor(Color(.secondaryLabel))
+				}
+				Spacer()
 			}
-			.padding()
-			Spacer()
+			.contentShape(Rectangle())
+			.onTapGesture {
+				onItemTap?()
+			}
+
 			Button {
 				viewModel.toggleIsDone(item: item)
-
 			} label: {
-				Image(
-					systemName: item.isDone ? "checkmark.circle.fill" : "circle"
-				)
-				.foregroundColor(.green)
-
+				Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+					.foregroundColor(.green)
 			}
 			.padding(20)
-
 		}
 	}
 }
-
 #Preview {
 	ToDoListItemsView(
 		item: .init(

@@ -12,7 +12,6 @@ struct ToDoListView: View {
 	@StateObject var viewModel: ToDoListViewViewModel
 	@FirestoreQuery var items: [ToDoListItem]
 
-	// Add an optional selected item for editing
 	@State private var selectedItem: ToDoListItem?
 
 	init(userId: String) {
@@ -28,24 +27,21 @@ struct ToDoListView: View {
 		NavigationView {
 			VStack {
 				List(items) { item in
-					ToDoListItemsView(item: item)
-						.onTapGesture {
-							// Set the selected item to trigger edit mode
-							selectedItem = item
-							viewModel.showingNewItemView = true
+					ToDoListItemsView(item: item, onItemTap: {
+						selectedItem = item
+						viewModel.showingNewItemView = true
+					})
+					.swipeActions {
+						Button("Delete") {
+							viewModel.delete(id: item.id)
 						}
-						.swipeActions {
-							Button("Delete") {
-								viewModel.delete(id: item.id)
-							}
-							.tint(.red)
-						}
+						.tint(.red)
+					}
 				}
 			}
 			.navigationTitle("To Do List")
 			.toolbar {
 				Button {
-					// When adding a new item, clear the selectedItem
 					selectedItem = nil
 					viewModel.showingNewItemView = true
 				} label: {
@@ -53,7 +49,6 @@ struct ToDoListView: View {
 				}
 			}
 			.sheet(isPresented: $viewModel.showingNewItemView) {
-				// Pass the selected item (if any) to NewItemView
 				NewItemView(newItemPresented: $viewModel.showingNewItemView, itemToEdit: selectedItem)
 			}
 		}
