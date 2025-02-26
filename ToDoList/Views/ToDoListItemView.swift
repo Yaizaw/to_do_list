@@ -1,5 +1,5 @@
 //
-//  ToDoListItemsView.swift
+//  ToDoListItemView.swift
 //  ToDoList
 //
 //  Created by Yaiza Wadhwani Valderas on 15/2/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ToDoListItemsView: View {
+struct ToDoListItemView: View {
 	@StateObject var viewModel = ToDoListItemViewViewModel()
 	let item: ToDoListItem
 	var onItemTap: (() -> Void)? = nil
@@ -41,7 +41,7 @@ struct ToDoListItemsView: View {
 	}
 }
 #Preview {
-	ToDoListItemsView(
+	ToDoListItemView(
 		item: .init(
 			id: "123", title: "Get milk", dueDate: Date().timeIntervalSince1970,
 			createdDate: Date().timeIntervalSince1970, isDone: true)

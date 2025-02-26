@@ -1,5 +1,5 @@
 //
-//  ToDoListItemsViews.swift
+//  ToDoListItemViews.swift
 //  ToDoList
 //
 //  Created by Yaiza Wadhwani Valderas on 15/2/25.
@@ -26,12 +26,18 @@ struct ToDoListView: View {
 	var body: some View {
 		NavigationView {
 			VStack {
+				HeaderView2(
+					tittle: "To-do List",
+					backgroundColor: Color(
+						red: 186 / 255, green: 216 / 255, blue: 182 / 255)
+				).offset(y: 10)
+
 				List(items) { item in
-					ToDoListItemsView(item: item, onItemTap: {
+					ToDoListItemView(item: item, onItemTap: {
 						selectedItem = item
 						viewModel.showingNewItemView = true
 					})
-					.swipeActions {
+					.swipeActions(allowsFullSwipe: false) {
 						Button("Delete") {
 							viewModel.delete(id: item.id)
 						}
@@ -39,7 +45,6 @@ struct ToDoListView: View {
 					}
 				}
 			}
-			.navigationTitle("To Do List")
 			.toolbar {
 				Button {
 					selectedItem = nil
