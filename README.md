@@ -39,7 +39,4 @@ Contributions are welcome! If you have suggestions or improvements, please follo
 License:
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-Contact:
-For any questions or feedback, please open an issue or contact [your email address].
-
 Happy coding!
