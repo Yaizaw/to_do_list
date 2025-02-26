@@ -15,7 +15,7 @@ Requirements:
 
 Installation:
 1. Clone the Repository:
-   git clone https://github.com/yourusername/swift-todo-list.git
+   git clone https://github.com/Yaizaw/to_do_list.git
    cd swift-todo-list
 
 2. Open in Xcode:
